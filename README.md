@@ -16,6 +16,8 @@ To pull the project files:
 
 $ git clone https://github.com/LetsHangout/SimpleNotetaking
 
+Then import to eclipse
+
 
 To pull any changes:
 
