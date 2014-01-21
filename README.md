@@ -22,7 +22,7 @@ $ git pull origin master
 
 To push changes:
 
-$ git add <file that was changed>
+$ git add <<file that was changed>>
 
 $ git commit -m <'message'>
 
