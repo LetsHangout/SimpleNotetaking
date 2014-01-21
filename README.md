@@ -32,3 +32,6 @@ $ git push origin [branch]
 
 
 If you want to learn more about using git, this book will do a lot better explaining than I can: http://git-scm.com/book/en
+
+
+Also, If you see I'm doing something wrong please correct me! This is my first time setting up a project!
