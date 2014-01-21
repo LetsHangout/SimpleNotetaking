@@ -22,11 +22,11 @@ $ git pull origin master
 
 To push changes:
 
-$ git add <<file that was changed>>
+$ git add [file that was changed]
 
-$ git commit -m <'message'>
+$ git commit -m ['message']
 
-$ git push origin <branch>
+$ git push origin [branch]
 
 
-If you want to learn more about using git: http://git-scm.com/book/en
+If you want to learn more about using git, this book will do a lot better explaining than I can: http://git-scm.com/book/en
