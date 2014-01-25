@@ -44,6 +44,26 @@ Also, If you see I'm doing something wrong please correct me! This is my first t
 
 ---
 
+#### Install Egit plugin and have it show
+You can use this if you want. Just saves a few keystrokes and time :D
+
+To install:
+1) Click Help, then click Install New Software...
+2) In the Work with box, click the carrot then select --All Avialble Sites--.
+3) In the search bar type Git.
+4) Open Collaboration then check Eclipse EGit and click next. It should download and install the plugin now.
+![readme_android1](http://imgur.com/A0M02gu "Install plugin")
+
+To show in Eclipse:
+1)Click Window on the top bar then go to Show View and click Other.
+![readme_android1](http://imgur.com/LmnZbdJ "Show plugin")
+
+2)Open Git section, click Git Repositories and hit OK.
+![readme_android1](http://imgur.com/wbJrh9r "Show plugin")
+
+
+---
+
 #### Git Commits with Eclipse
 
 You can use the [Egit Eclipse plugin](http://www.eclipse.org/egit/download/) to more easily manage which files you want to
