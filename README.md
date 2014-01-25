@@ -52,14 +52,14 @@ To install:
 2) In the Work with box, click the carrot then select --All Avialble Sites--.
 3) In the search bar type Git.
 4) Open Collaboration then check Eclipse EGit and click next. It should download and install the plugin now.
-![readme_android1](http://imgur.com/A0M02gu "Install plugin")
+![readme_android1](http://imgur.com/A0M02gu.png "Install plugin")
 
 To show in Eclipse:
 1)Click Window on the top bar then go to Show View and click Other.
-![readme_android1](http://imgur.com/LmnZbdJ "Show plugin")
+![readme_android1](http://imgur.com/LmnZbdJ.png "Show plugin")
 
 2)Open Git section, click Git Repositories and hit OK.
-![readme_android1](http://imgur.com/wbJrh9r "Show plugin")
+![readme_android1](http://imgur.com/wbJrh9r.png "Show plugin")
 
 
 ---
