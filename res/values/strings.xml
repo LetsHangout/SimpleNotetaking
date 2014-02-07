@@ -4,5 +4,7 @@
     <string name="app_name">Simple Notetaking</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="note_button">Simple Note</string>
+    <string name="back">Back</string>
 
 </resources>

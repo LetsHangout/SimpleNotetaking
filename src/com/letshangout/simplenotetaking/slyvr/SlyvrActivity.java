@@ -42,7 +42,7 @@ public class SlyvrActivity extends Activity {
     
     public void addListenerOnButton() {
 		final Context context = this;
-		button = (Button) findViewById(R.id.button1);
+		button = (Button) findViewById(R.id.buttonBack);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
