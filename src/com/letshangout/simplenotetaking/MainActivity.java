@@ -33,8 +33,8 @@ public class MainActivity extends Activity {
 
 	public void addListenerOnButton() {
 		final Context context = this;
-		button = (Button) findViewById(R.id.buttonBack);
-		noteButton = (Button) findViewById(R.id.noteButton);
+		button = (Button) findViewById(R.id.buttonSlyvr);
+		noteButton = (Button) findViewById(R.id.buttonNote);
 		
 		button.setOnClickListener(new OnClickListener() {
 			@Override

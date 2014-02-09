@@ -21,6 +21,6 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="21dp"
-        android:text="@string/back" />
+        android:text="@string/main_menu" />
 
 </RelativeLayout>
