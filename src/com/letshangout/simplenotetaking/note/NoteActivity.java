@@ -90,7 +90,7 @@ public class NoteActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int id) {
-
+										// Overridden!!
 									}
 								});
 
@@ -127,9 +127,14 @@ public class NoteActivity extends Activity {
 										//make sure file doesn't already exist
 										if (!file.exists()) {
 											try {
-												file.createNewFile();
+												file.createNewFile();												
 												// Go to new file??
-
+												
+												Intent intent = new Intent(context, NewNote.class);
+												intent.putExtra("FILENAME", alertEditText.getText().toString());
+												startActivity(intent);
+												
+												//Dismiss dialog?
 											} catch (IOException e) {
 												e.printStackTrace();
 											}

@@ -9,5 +9,7 @@
     <string name="new_note">New Note</string>
     <string name="edit_note">Edit note</string>
     <string name="enter_filename">Enter file name</string>
+    <string name="new_filename">File Name</string>
+    <string name="save">Save</string>
 
 </resources>
