@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
                 <activity
-            android:name="com.letshangout.simplenotetaking.note.NewNote"
+            android:name="com.letshangout.simplenotetaking.note.NoteHelper"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

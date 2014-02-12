@@ -11,5 +11,8 @@
     <string name="enter_filename">Enter file name</string>
     <string name="new_filename">File Name</string>
     <string name="save">Save</string>
+    <string name="action_new">New</string>
+    <string name="no_files">No notes found, create new?</string>
+    <string name="current_notes">Notes</string>
 
 </resources>
