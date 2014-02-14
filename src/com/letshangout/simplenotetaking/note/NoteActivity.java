@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.letshangout.simplenotetaking.R;
 import com.letshangout.simplenotetaking.MainActivity;
 
+import android.R.color;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -33,17 +34,25 @@ import android.widget.Toast;
 
 public class NoteActivity extends Activity {
 	final Context context = this;
-	final String ourDirectoryString = Environment.getExternalStorageDirectory() + File.separator + "SimpleNotes" + File.separator;
-	final File ourDirectory =new File(Environment.getExternalStorageDirectory() + File.separator + "SimpleNotes" + File.separator);
+	final String OUR_DIRECTORY_STRING = Environment
+			.getExternalStorageDirectory()
+			+ File.separator
+			+ "SimpleNotes"
+			+ File.separator;
+	final File OUR_DIRECTORY_FILE = new File(
+			Environment.getExternalStorageDirectory() + File.separator
+					+ "SimpleNotes" + File.separator);
 	Button main = null;
-	FileHelper helper = new FileHelper();
+	FileHelper fh = new FileHelper();
+	NoteHelper nh = new NoteHelper();
 	ListView listView;
 	TextView headerTV;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_note);
-		helper.createDirectory();
+		fh.createDirectory();
 		addListenerOnButton();
 		setupListview();
 
@@ -60,10 +69,13 @@ public class NoteActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.action_new:
 			final EditText alertEditText = new EditText(context);
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.MATCH_PARENT);
 			alertEditText.setLayoutParams(lp);
 
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					context);
 
 			alertDialogBuilder
 					.setMessage("Enter new file name")
@@ -83,7 +95,8 @@ public class NoteActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
-									
+									// Actions here overridden below
+
 								}
 							});
 
@@ -97,45 +110,58 @@ public class NoteActivity extends Activity {
 			 * override positive button behavior must do this or else dialog
 			 * will close when user tries to create a file that already exists
 			 */
-			alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+			alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+					.setOnClickListener(new View.OnClickListener() {
 
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
 							// Checks to make sure external storage exists
 							// and is read/writeable
-							if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+							if (!Environment.getExternalStorageState().equals(
+									Environment.MEDIA_MOUNTED)) {
 								// Handle no sdcard event
 
 							} else {
 								// make sure file name is valid
-								if (alertEditText.getText().toString().matches("[a-zA-Z0-9]*")) {
-									File file = new File(ourDirectory, alertEditText.getText().toString() + ".txt");
+								if (alertEditText.getText().toString()
+										.matches("[a-zA-Z0-9]*")) {
+									nh.setFileNameString(alertEditText
+											.getText().toString());
+
 									// make sure file doesn't already exist
-									if (!file.exists()) {
+									if (!nh.getFilePath().exists()) {
 										try {
-											file.createNewFile();
+											nh.getFilePath().createNewFile();
 											// Go to new file??
 
-											Intent intent = new Intent(context, NoteHelper.class);
+											Intent intent = new Intent(context,
+													NoteHelper.class);
+											nh.setFileNameString(alertEditText
+													.getText().toString());
 											intent.putExtra("FILENAME",
-													alertEditText.getText().toString());
+													nh.getFileNameString());
 											startActivity(intent);
-											
 
 											// Dismiss dialog?
 										} catch (IOException e) {
 											e.printStackTrace();
 										}
 									} else {
-										alertEditText.setHint(alertEditText.getText().toString().toLowerCase());
+										alertEditText.setHint(alertEditText
+												.getText().toString()
+												.toLowerCase());
 										alertEditText.setText("");
-										Toast.makeText(context, "File already exists!", Toast.LENGTH_SHORT).show();
+										Toast.makeText(context,
+												"File already exists!",
+												Toast.LENGTH_SHORT).show();
 									}
 
 								} else {
 									alertEditText.setText("");
-									Toast.makeText(context, "Only A-z & 0-9 please", Toast.LENGTH_SHORT).show();
+									Toast.makeText(context,
+											"Only A-z & 0-9 please",
+											Toast.LENGTH_SHORT).show();
 								}
 							}
 						}
@@ -155,7 +181,8 @@ public class NoteActivity extends Activity {
 				public void onShow(DialogInterface arg0) {
 					// TODO Auto-generated method stub
 					alertEditText.requestFocus();
-					alertEditText.setImeActionLabel("",EditorInfo.IME_ACTION_NEXT);
+					alertEditText.setImeActionLabel("",
+							EditorInfo.IME_ACTION_NEXT);
 				}
 			});
 			return true;
@@ -168,7 +195,7 @@ public class NoteActivity extends Activity {
 	}
 
 	public void addListenerOnButton() {
-		
+
 		main = (Button) findViewById(R.id.buttonMain);
 		main.setOnClickListener(new OnClickListener() {
 			@Override
@@ -178,63 +205,71 @@ public class NoteActivity extends Activity {
 			}
 		});
 	}
-	
-	public void setupListview(){
+
+	public void setupListview() {
 		listView = (ListView) findViewById(R.id.listView1);
 		headerTV = (TextView) findViewById(R.id.textView1);
 		ArrayAdapter<String> arrayAdapter;
-		
-		
-		ArrayList<String> f = helper.getFileList(helper.getFiles(ourDirectoryString));
-		
-		if(f != null){
-			arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, helper.getFileList(helper.getFiles(ourDirectoryString)));
+
+		ArrayList<String> f = fh.getFileList(fh.getFiles(OUR_DIRECTORY_STRING));
+
+		if (f != null) {
+			arrayAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_list_item_1, fh.getFileList(fh
+							.getFiles(OUR_DIRECTORY_STRING)));
 			listView.setAdapter(arrayAdapter);
 			headerTV.setText(R.string.current_notes);
-		}else{
+		} else {
 			headerTV.setText(R.string.no_files);
 		}
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View v, int position,
-					long id) {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
 				// TODO Auto-generated method stub
 				final String fileString = ((TextView) v).getText().toString();
-				
+
 				AlertDialog.Builder options = new AlertDialog.Builder(context);
-				options
-					.setMessage("What do you want to do?")
-					.setNegativeButton("Back", new DialogInterface.OnClickListener(){
+				options.setMessage("What do you want to do?")
+						.setNegativeButton("Back",
+								new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int arg1) {
-							// TODO Auto-generated method stub
-							dialog.cancel();
-						}
-					
-				})
-					.setPositiveButton("Open", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							Intent intent = new Intent(context, NoteHelper.class);
-							intent.putExtra("FILENAME", fileString);
-							startActivity(intent);
-						}
-					})
-					.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
+									@Override
+									public void onClick(DialogInterface dialog,
+											int arg1) {
+										// TODO Auto-generated method stub
+										dialog.cancel();
+									}
 
-							//Delete file
-							
-						}
-					});
+								})
+						.setPositiveButton("Open",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										Intent intent = new Intent(context,
+												NoteHelper.class);
+										nh.setFileNameString(fileString);
+										intent.putExtra("FILENAME",
+												nh.getFileNameString());
+										startActivity(intent);
+									}
+								})
+						.setNeutralButton("Delete",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										nh.deleteOurFile(OUR_DIRECTORY_STRING
+												+ fileString);
+									}
+								});
 				AlertDialog ad = options.create();
 				ad.show();
 			}
